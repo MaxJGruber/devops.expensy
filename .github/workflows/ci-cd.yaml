@@ -149,11 +149,11 @@ jobs:
           sed -i "s|IMAGE_TAG|${{ github.sha }}|g" k8s/*.yaml
 
           # Apply Kubernetes manifests
-          kubectl apply -f k8s/ -n staging
+          kubectl apply -f k8s/ -n expensy
 
           # Wait for rollout to complete
-          kubectl rollout status deployment/expensy-backend -n staging --timeout=300s
-          kubectl rollout status deployment/expensy-frontend -n staging --timeout=300s
+          kubectl rollout status deployment/expensy-backend -n expensy --timeout=300s
+          kubectl rollout status deployment/expensy-frontend -n expensy --timeout=300s
 
       - name: Run Smoke Tests
         run: |
@@ -193,15 +193,15 @@ jobs:
           sed -i "s|IMAGE_TAG|${{ github.sha }}|g" k8s/*.yaml
 
           # Apply Kubernetes manifests
-          kubectl apply -f k8s/ -n production
+          kubectl apply -f k8s/ -n expensy
 
           # Wait for rollout to complete
-          kubectl rollout status deployment/expensy-backend -n production --timeout=300s
-          kubectl rollout status deployment/expensy-frontend -n production --timeout=300s
+          kubectl rollout status deployment/expensy-backend -n expensy --timeout=300s
+          kubectl rollout status deployment/expensy-frontend -n expensy --timeout=300s
 
       - name: Verify Deployment
         run: |
           echo "Verifying production deployment..."
-          kubectl get pods -n production
-          kubectl get services -n production
+          kubectl get pods -n expensy
+          kubectl get services -n expensy
           echo "Production deployment verified!"
