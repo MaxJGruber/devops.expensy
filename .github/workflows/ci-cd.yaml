@@ -25,8 +25,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
+          node-version: "20"
+          cache: "npm"
           cache-dependency-path: expensy_backend/package-lock.json
 
       - name: Install dependencies
@@ -47,8 +47,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
+          node-version: "20"
+          cache: "npm"
           cache-dependency-path: expensy_frontend/package-lock.json
 
       - name: Install dependencies
@@ -146,10 +146,10 @@ jobs:
       - name: Deploy to Staging
         run: |
           # Update image tags in Kubernetes manifests
-          sed -i "s|IMAGE_TAG|${{ github.sha }}|g" k8s/staging/*.yaml
+          sed -i "s|IMAGE_TAG|${{ github.sha }}|g" k8s/*.yaml
 
           # Apply Kubernetes manifests
-          kubectl apply -f k8s/staging/ -n staging
+          kubectl apply -f k8s/ -n staging
 
           # Wait for rollout to complete
           kubectl rollout status deployment/expensy-backend -n staging --timeout=300s
@@ -190,10 +190,10 @@ jobs:
       - name: Deploy to Production
         run: |
           # Update image tags in Kubernetes manifests
-          sed -i "s|IMAGE_TAG|${{ github.sha }}|g" k8s/production/*.yaml
+          sed -i "s|IMAGE_TAG|${{ github.sha }}|g" k8s/*.yaml
 
           # Apply Kubernetes manifests
-          kubectl apply -f k8s/production/ -n production
+          kubectl apply -f k8s/ -n production
 
           # Wait for rollout to complete
           kubectl rollout status deployment/expensy-backend -n production --timeout=300s
