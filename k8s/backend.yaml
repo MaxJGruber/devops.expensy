@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: kabamaru2372/expensy-backend:1.0
+          image: kabamaru2372/expensy-backend:latest
           ports:
             - containerPort: 8706
           env:
