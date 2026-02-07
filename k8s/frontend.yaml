@@ -18,7 +18,9 @@ spec:
           image: kabamaru2372/expensy-frontend:latest
           ports:
             - containerPort: 3000
-          
+          env:
+            - name: NEXT_PUBLIC_API_URL
+              value: "http://20.76.148.67"
 ---
 apiVersion: v1
 kind: Service

@@ -13,8 +13,6 @@ RUN npm run build
 FROM node:20-alpine AS runner
 WORKDIR /app
 
-ENV NODE_ENV=production
-
 # Copy only what Next needs to run
 COPY --from=builder /app/package*.json ./
 RUN npm ci --omit=dev
